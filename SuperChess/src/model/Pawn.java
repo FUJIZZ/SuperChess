@@ -1,15 +1,16 @@
 package model;
 
-import tools.Position;
-
 public class Pawn extends Piece {
 
-    public Pawn(boolean white, Position position) {
-        super(white, position, "P");
+    private boolean hasMoved;
+
+    public Pawn(boolean white, int x, int y) {
+        super(white, "pawn", x, y);
+        this.hasMoved = false;
     }
 
     @Override
-    public boolean isValidMove(Position newPosition, Board board) {
+    public boolean isValidMove(Board board) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'isValidMove'");
     }

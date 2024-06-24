@@ -1,14 +1,15 @@
 package model;
 
-import tools.Position;
-
 public class Rook extends Piece {
 
-    public Rook(boolean white, Position position) {
-        super(white, position, "R");
+    private boolean hasMoved;
+
+    public Rook(boolean white, int x, int y) {
+        super(white, "rook", x, y);
+        this.hasMoved = false;
     }
 
-    public boolean isValidMove(Position newPosition, Board board) {
+    public boolean isValidMove(Board board) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'isValidMove'");
     }

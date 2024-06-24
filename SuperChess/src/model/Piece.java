@@ -1,37 +1,46 @@
 package model;
 
-import tools.Position;
-
 public abstract class Piece {
 
     private String name;
-    private boolean white;
-    private Position position;
+    private boolean isWhite;
+    private int x;
+    private int y;
     
-    public Piece(boolean white, Position position, String name) {
-        this.white = white;
-        this.position = position;
+    public Piece(boolean isWhite, String name, int x, int y) {
+        this.isWhite = isWhite;
         this.name = name;
+        this.x = x;
+        this.y = y;
     }
 
-    public abstract boolean isValidMove(Position newPosition, Board board);
+    public abstract boolean isValidMove(Board board);
+
+    public void move(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    public boolean isInsideBoard(int x, int y) {
+        return x >= 0 && x < 8 && y >= 0 && y < 8;
+    }
 
     // Getters and Setters
 
     public boolean isWhite() {
-        return white;
-    }
-
-    public Position getPosition() {
-        return position;
+        return isWhite;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setPosition(Position position) {
-        this.position = position;
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
     }
     
 }

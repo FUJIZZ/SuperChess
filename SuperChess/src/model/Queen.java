@@ -1,14 +1,12 @@
 package model;
 
-import tools.Position;
-
 public class Queen extends Piece {
 
-    public Queen(boolean white, Position position) {
-        super(white, position, "Q");
+    public Queen(boolean white, int x,int y) {
+        super(white, "queen", x, y);
     }
 
-    public boolean isValidMove(Position newPosition, Board board) {
+    public boolean isValidMove(Board board) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'isValidMove'");
     }

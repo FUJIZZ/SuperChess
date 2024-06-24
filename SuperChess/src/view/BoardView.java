@@ -9,7 +9,7 @@ public class BoardView {
         if(piece == null) {
             System.out.print(". ");
         } else {
-            System.out.print(piece.getName() + " ");
+            System.out.print(piece.getName().charAt(0) + " ");
         }
     }
 

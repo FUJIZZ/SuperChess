@@ -1,14 +1,12 @@
 package model;
 
-import tools.Position;
-
 public class Knight extends Piece {
     
-        public Knight(boolean white, Position position) {
-            super(white, position, "N");
+        public Knight(boolean white, int x, int y) {
+            super(white, "knight", x, y);
         }
     
-        public boolean isValidMove(Position newPosition, Board board) {
+        public boolean isValidMove(Board board) {
             // TODO Auto-generated method stub
             throw new UnsupportedOperationException("Unimplemented method 'isValidMove'");
         }

@@ -1,11 +1,13 @@
 package view;
 
-import model.Piece.PieceType;
+import model.Piece;
 
 public class PieceView {
 
-    public void printPiece(PieceType pieceType) {
-        System.out.println("Piece: " + pieceType.toString());
+    public void printPiece(Piece piece) {
+        System.out.println("Piece: " + piece.getName() + " " + piece.getX() + " " + piece.getY() + " " + piece.isWhite());
     }
+
+    
     
 }
