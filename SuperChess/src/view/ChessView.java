@@ -36,6 +36,7 @@ public class ChessView extends JFrame {
 
         setLocationRelativeTo(null);
         setVisible(true);
+        System.out.println(this.getWidth() + " " + this.getHeight());
     }
 
     public void refresh() {

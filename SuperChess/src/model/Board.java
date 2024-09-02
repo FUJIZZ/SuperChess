@@ -22,8 +22,8 @@ public class Board {
                 board[i][0] = new Rook(true, i, 0);
                 board[i][1] = new Knight(true, i, 1);
                 board[i][2] = new Bishop(true, i, 2);
-                board[i][3] = new Queen(true, i, 3);
-                board[i][4] = new King(true, i, 4);
+                board[i][3] = new King(true, i, 3);
+                board[i][4] = new Queen(true, i, 4);
                 board[i][5] = new Bishop(true, i, 5);
                 board[i][6] = new Knight(true, i, 6);
                 board[i][7] = new Rook(true, i, 7);
@@ -38,7 +38,6 @@ public class Board {
                 board[7 - i][7] = new Rook(false, 7 - i, 7);
             }
             else {
-                board[i][1] = new Knight(true, i, 1);
                 for (int j = 0; j < 8; j++) {
                     board[i][j] = new Pawn(true, i, j);
                     board[7 - i][j] = new Pawn(false, 7 - i, j);
@@ -48,13 +47,8 @@ public class Board {
 
     }   
 
-    public Piece getPiece(int x, int y) {
+    public Piece getPieceAt(int x, int y) {
         return board[x][y];
-    }
-
-    public void movePiece(int oldX, int oldY, int newX, int newY) {
-        board[newX][newY] = board[oldX][oldY];
-        board[oldX][oldY] = null;
     }
 
     public boolean isPieceAt(int x, int y) {
@@ -74,8 +68,28 @@ public class Board {
         selectedY = -1;
     }
 
+    public boolean isPossibleMoveSquare(int x, int y) {
+        Piece piece = board[selectedX][selectedY];
+        for (int[] move : piece.getPossibleMoves(this)) {
+            if (move[0] == x && move[1] == y) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void movePieceTo(int x, int y) {
+        board[x][y] = board[selectedX][selectedY];
+        board[selectedX][selectedY] = null;
+        resetSelection();
+    }
+
     public boolean isWhiteTurn() {
         return whiteTurn;
+    }
+
+    public void switchTurn() {
+        whiteTurn = !whiteTurn;
     }
 
     // Getter
@@ -100,6 +114,11 @@ public class Board {
 
     public void setSelectedY(int selectedY) {
         this.selectedY = selectedY;
+    }
+
+    public void selectPiece(int x, int y) {
+        this.selectedX = x;
+        this.selectedY = y;
     }
     
 }

@@ -32,14 +32,25 @@ public class BoardController {
     }
 
     private void handleMouseClick(MouseEvent e) {
-        System.out.println("Mouse clicked at: " + e.getX() + " " + e.getY());
-        int col = e.getY() / 100;
-        int row = e.getX() / 100;
-        board.setSelectedX(col);
-        board.setSelectedY(row);
-        System.out.println("Board mouse clicked at: " + col + " " + row);
+        System.out.println("Mouse clicked at: " + e.getY() + " " + e.getX());
+        int x = (e.getY()-34) / 100;
+        int y = (e.getX()) / 100;
+        System.out.println("Board mouse clicked at: " + x + " " + y);
+
+        // Check we selected a piece and we clicked on a possible move square
+        if(board.isPieceSelected() && board.isPossibleMoveSquare(x, y) ) {
+            board.movePieceTo(x, y);
+        // Check if we clicked on a piece
+        } else if (board.getPieceAt(x, y) != null) {
+            board.selectPiece(x, y);
+        // Check if we clicked on an empty square
+        } else {
+            board.resetSelection();
+        }
         view.repaint();
     }
+
+    
 
     // Getter and setters
 

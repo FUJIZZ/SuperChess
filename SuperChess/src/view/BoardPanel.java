@@ -1,6 +1,8 @@
 package view;
 
 import javax.swing.JPanel;
+
+import controller.BoardController;
 import model.Board;
 import model.Piece;
 import tools.ImageLoader;
@@ -27,6 +29,7 @@ public class BoardPanel extends JPanel {
         drawBoard(g);
         drawPieces(g);
         drawSelection(g);
+        drawPossibleMoves(g);
     }
 
     private void drawBoard(Graphics g) {
@@ -45,7 +48,7 @@ public class BoardPanel extends JPanel {
     private void drawPieces(Graphics g) {
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 8; col++) {
-                Piece piece = board.getPiece(row, col);
+                Piece piece = board.getPieceAt(row, col);
                 if (piece != null) {
                     String imageName = (piece.isWhite() ? "white_" : "black_") + piece.getName();
                     BufferedImage image = imageLoader.getImage(imageName);
@@ -61,13 +64,44 @@ public class BoardPanel extends JPanel {
             int row = board.getSelectedX();
             Graphics2D g2 = (Graphics2D) g;
             g2.setColor(Color.YELLOW);
-            g2.setStroke(new BasicStroke(5));
+            g2.setStroke(new BasicStroke(3));
             g2.drawRect(col * 100, row * 100, 100, 100);
             System.out.println("Piece selected");
         }
         
     }
 
+    private void drawPossibleMoves(Graphics g) {
+        if(board.isPieceSelected()) {
+            Piece piece = board.getPieceAt(board.getSelectedX(), board.getSelectedY());
+            for(int[] move : piece.getPossibleMoves(board)) {
+                int col = move[1];
+                int row = move[0];
+                Graphics2D g2 = (Graphics2D) g;
+                g2.setColor(Color.GREEN);
+                g2.setStroke(new BasicStroke(3));
+                g2.drawRect(col * 100, row * 100, 100, 100);
+            }
+        }
+        //printBoard();
+    }
 
+    private void printPiece(Piece piece) {
+        if(piece == null) {
+            System.out.print(". ");
+        } else {
+            System.out.print(piece.getName().charAt(0) + " ");
+        }
+    }
+
+    public void printBoard() {
+        System.out.println("Board: ");
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                printPiece(board.getPieceAt(i, j));
+            }
+            System.out.println();
+        }
+    } 
     
 }
